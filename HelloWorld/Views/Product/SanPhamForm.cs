@@ -39,6 +39,7 @@ namespace helloworld
 
             // Khởi tạo BindingSource và gắn vào DataGridView
             dataGridViewSanPhamChiTiet.DataSource = variantsBindingSource;
+            dataGridViewSanPhamChiTiet.CellDoubleClick += DataGridViewSanPhamChiTiet_CellDoubleClick;
 
             this.Load += SanPhamForm_Load;
             buttonLuu.Click += ButtonLuu_Click;
@@ -618,6 +619,60 @@ namespace helloworld
         private void dataGridViewSanPhamChiTiet_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
+        }
+
+        /// <summary>
+        /// Mở form chỉnh sửa biến thể khi double-click vào dòng
+        /// </summary>
+        private async void DataGridViewSanPhamChiTiet_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0)
+            {
+                return;
+            }
+
+            if (!editingProductId.HasValue)
+            {
+                MessageBox.Show("Vui lòng lưu sản phẩm trước khi chỉnh sửa biến thể.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            try
+            {
+                DataGridViewRow row = dataGridViewSanPhamChiTiet.Rows[e.RowIndex];
+                int variantId = 0;
+
+                // Ưu tiên lấy từ DataRowView để tránh lỗi tên cột
+                if (row.DataBoundItem is DataRowView rowView &&
+                    rowView["Mã biến thể"] != null &&
+                    int.TryParse(rowView["Mã biến thể"].ToString(), out int parsedId))
+                {
+                    variantId = parsedId;
+                }
+                else if (row.Cells["Mã biến thể"] != null &&
+                         int.TryParse(row.Cells["Mã biến thể"].Value?.ToString(), out int cellId))
+                {
+                    variantId = cellId;
+                }
+
+                if (variantId <= 0)
+                {
+                    MessageBox.Show("Không thể xác định mã biến thể để chỉnh sửa.", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                var editForm = new SanPhamChiTietForm(editingProductId.Value, variantId);
+                DialogResult result = editForm.ShowDialog();
+                if (result == DialogResult.OK)
+                {
+                    await LoadProductVariantsAsync(editingProductId.Value);
+                    await LoadProductSummaryAsync(editingProductId.Value);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi mở form chỉnh sửa biến thể: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

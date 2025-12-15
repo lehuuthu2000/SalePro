@@ -250,7 +250,7 @@ namespace helloworld
                 SmtpConfig smtpConfig = new SmtpConfig();
                 smtpConfig.Load();
 
-                // Kiểm tra xem đã có cấu hình chưa
+                // Kiểm tra cấu hình
                 if (!smtpConfig.IsConfigured())
                 {
                     throw new Exception(
@@ -259,16 +259,16 @@ namespace helloworld
                         "1. Gmail: smtp.gmail.com, Port 587\n" +
                         "2. Outlook: smtp-mail.outlook.com, Port 587\n" +
                         "3. Yahoo: smtp.mail.yahoo.com, Port 587\n\n" +
-                        "Lưu ý: Với Gmail, cần tạo App Password từ Google Account > Security > 2-Step Verification > App passwords"
+                        "Lưu ý: Với Gmail, cần tạo App Password (Google Account > Security > 2-Step Verification > App passwords)"
                     );
                 }
 
-                // Tạo email message
-                MailMessage mail = new MailMessage();
-                mail.From = new MailAddress(smtpConfig.SmtpUsername, "Hệ thống Quản lý Bán hàng");
-                mail.To.Add(new MailAddress(toEmail, fullName));
-                mail.Subject = "Cấp lại mật khẩu - Hệ thống Quản lý Bán hàng";
-                mail.Body = $@"
+                using (var mail = new MailMessage())
+                {
+                    mail.From = new MailAddress(smtpConfig.SmtpUsername, "Hệ thống Quản lý Bán hàng");
+                    mail.To.Add(new MailAddress(toEmail, fullName));
+                    mail.Subject = "Cấp lại mật khẩu - Hệ thống Quản lý Bán hàng";
+                    mail.Body = $@"
 Xin chào {fullName},
 
 Bạn đã yêu cầu cấp lại mật khẩu cho tài khoản của bạn.
@@ -286,22 +286,21 @@ Nếu bạn không yêu cầu cấp lại mật khẩu, vui lòng liên hệ v�
 Trân trọng,
 Hệ thống Quản lý Bán hàng
 ";
-                mail.IsBodyHtml = false;
-                mail.BodyEncoding = Encoding.UTF8;
-                mail.SubjectEncoding = Encoding.UTF8;
+                    mail.IsBodyHtml = false;
+                    mail.BodyEncoding = Encoding.UTF8;
+                    mail.SubjectEncoding = Encoding.UTF8;
 
-                // Cấu hình SMTP client
-                SmtpClient smtpClient = new SmtpClient(smtpConfig.SmtpHost, smtpConfig.SmtpPort);
-                smtpClient.EnableSsl = true;
-                smtpClient.Credentials = new NetworkCredential(smtpConfig.SmtpUsername, smtpConfig.SmtpPassword);
-                smtpClient.Timeout = 30000; // 30 seconds
+                    using (var smtpClient = new SmtpClient(smtpConfig.SmtpHost, smtpConfig.SmtpPort))
+                    {
+                        smtpClient.EnableSsl = true;
+                        smtpClient.Credentials = new NetworkCredential(smtpConfig.SmtpUsername, smtpConfig.SmtpPassword);
+                        smtpClient.UseDefaultCredentials = false;
+                        smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
+                        smtpClient.Timeout = 30000; // 30 seconds
 
-                // Gửi email bất đồng bộ
-                await Task.Run(() => smtpClient.Send(mail));
-
-                // Dispose resources
-                mail.Dispose();
-                smtpClient.Dispose();
+                        await smtpClient.SendMailAsync(mail);
+                    }
+                }
             }
             catch (SmtpException ex)
             {

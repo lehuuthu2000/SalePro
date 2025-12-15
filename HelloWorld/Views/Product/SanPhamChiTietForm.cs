@@ -16,16 +16,21 @@ namespace helloworld
         private ProductBLL sanPhamModels; // Đã chuyển sang ProductBLL
         private int productId; // ID sản phẩm cha
         private string? selectedImagePath = null;
+        private readonly int? editingVariantId;
+        private readonly bool isEditMode;
 
         /// <summary>
         /// Constructor - Nhận productId để gán vào ProductVariant
         /// </summary>
         /// <param name="productId">ID sản phẩm cha</param>
-        public SanPhamChiTietForm(int productId)
+        /// <param name="variantId">ID biến thể cần chỉnh sửa (null = thêm mới)</param>
+        public SanPhamChiTietForm(int productId, int? variantId = null)
         {
             InitializeComponent();
             sanPhamModels = new ProductBLL();
             this.productId = productId;
+            editingVariantId = variantId;
+            isEditMode = editingVariantId.HasValue;
 
             this.Load += SanPhamChiTietForm_Load;
             buttonLuu.Click += ButtonLuu_Click;
@@ -50,19 +55,58 @@ namespace helloworld
         {
             try
             {
-                // Tự động tạo SKU (sẽ được cập nhật khi nhập size và color)
                 textBox1.ReadOnly = true;
                 textBox1.BackColor = Color.LightGray;
+
+                if (isEditMode && editingVariantId.HasValue)
+                {
+                    // Load dữ liệu biến thể để chỉnh sửa
+                    var variant = await sanPhamModels.GetProductVariantByIdAsync(editingVariantId.Value);
+                    if (variant == null)
+                    {
+                        MessageBox.Show("Không tìm thấy biến thể sản phẩm.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        this.Close();
+                        return;
+                    }
+
+                    // Đảm bảo productId khớp với biến thể (phòng trường hợp form được mở từ nơi khác)
+                    productId = variant.ProductId;
+
+                    textBox1.Text = variant.SKU;
+                    textBox2.Text = variant.Size ?? string.Empty;
+                    textBox3.Text = variant.Color ?? string.Empty;
+                    textBox4.Text = variant.ImportPrice.ToString("0");
+                    textBox5.Text = variant.SellingPrice.ToString("0");
+                    textBox6.Text = variant.StockQuantity.ToString();
+
+                    selectedImagePath = variant.ImagePath;
+                    if (!string.IsNullOrWhiteSpace(variant.ImagePath) && File.Exists(variant.ImagePath))
+                    {
+                        try
+                        {
+                            pictureBox1.Image = Image.FromFile(variant.ImagePath);
+                            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+                        }
+                        catch
+                        {
+                            // Nếu không load được ảnh, bỏ qua
+                        }
+                    }
+
+                    this.Text = "Chỉnh sửa biến thể sản phẩm";
+                    return;
+                }
+
+                // Thêm mới: tự động tạo SKU (sẽ được cập nhật khi nhập size và color)
                 textBox1.Text = "Đang tạo...";
 
-                // Lấy product_code để tạo SKU
                 string productCode = await sanPhamModels.GetProductCodeAsync(productId);
                 textBox1.Text = productCode; // Hiển thị product_code ban đầu
 
                 // Mặc định số lượng tồn kho = 0
                 textBox6.Text = "0";
 
-                // Thêm event handler để tự động cập nhật SKU khi thay đổi Size hoặc Color
+                // Thêm event handler để tự động cập nhật SKU khi thay đổi Size hoặc Color (chỉ ở chế độ thêm mới)
                 textBox2.TextChanged += (s, e) => UpdateSKU();
                 textBox3.TextChanged += (s, e) => UpdateSKU();
             }
@@ -227,32 +271,56 @@ namespace helloworld
                 string? imagePath = selectedImagePath;
                 bool isActive = true; // Mặc định là hoạt động
 
-                // Thêm ProductVariant
-                int variantId = await sanPhamModels.AddProductVariantAsync(
-                    productId,
-                    sku,
-                    size,
-                    color,
-                    importPrice,
-                    sellingPrice,
-                    stockQuantity,
-                    imagePath,
-                    isActive
-                );
+                if (isEditMode && editingVariantId.HasValue)
+                {
+                    await sanPhamModels.UpdateProductVariantAsync(
+                        editingVariantId.Value,
+                        sku,
+                        size,
+                        color,
+                        importPrice,
+                        sellingPrice,
+                        stockQuantity,
+                        imagePath,
+                        isActive
+                    );
 
-                MessageBox.Show(
-                    $"Thêm biến thể sản phẩm thành công!\nSKU: {sku}\nVariant ID: {variantId}",
-                    "Thành công",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Information
-                );
+                    MessageBox.Show(
+                        "Cập nhật biến thể sản phẩm thành công!",
+                        "Thành công",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information
+                    );
+                }
+                else
+                {
+                    int variantId = await sanPhamModels.AddProductVariantAsync(
+                        productId,
+                        sku,
+                        size,
+                        color,
+                        importPrice,
+                        sellingPrice,
+                        stockQuantity,
+                        imagePath,
+                        isActive
+                    );
+
+                    MessageBox.Show(
+                        $"Thêm biến thể sản phẩm thành công!\nSKU: {sku}\nVariant ID: {variantId}",
+                        "Thành công",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information
+                    );
+                }
 
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }
             catch (Exception ex)
             {
-             }
+                MessageBox.Show($"Lỗi khi lưu biến thể sản phẩm: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }
