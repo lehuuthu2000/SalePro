@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Compile Update="Views\Auth\DangKyViews.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\Auth\DangNhapViews.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\Auth\QuenMatKhau.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\Common\Main.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\Common\ViewsCaiDat.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\Common\ViewsTrangChu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\Customer\KhachHangForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\Customer\KhachHangViews.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\Order\HoaDonChonSanPhamForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\Order\HoaDonForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\Order\HoaDonViews.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\Product\SanPhamChiTietForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\Product\SanPhamDanhMuc.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\Product\SanPhamForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\Product\SanPhamViews.cs">
+      <SubType>Form</SubType>
+    </Compile>
+  </ItemGroup>
+</Project>

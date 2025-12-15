@@ -1,0 +1,83 @@
+---
+description: Quy tắc Coding chuẩn cho dự án WinForms C# bao gồm SOLID, Naming, Separation of Concerns và Async/Await.
+globs: ["**/*.cs"]
+alwaysApply: true
+---
+
+# 1. Quy tắc Coding (WinForms C#)
+
+Tài liệu này mô tả các quy tắc coding cốt lõi dùng cho dự án WinForms C#, đảm bảo code sạch, dễ bảo trì và tuân theo best practices.
+
+## Tổng quan
+
+Các quy tắc bao gồm 4 nhóm chính:
+- Mô hình 3 tầng bao gồm BLL và DAL và Models và Views
+- SOLID
+- Quy tắc đặt tên
+- Separation of Concerns (Tách biệt UI và Logic)
+- Sử dụng Async/Await cho các tác vụ chậm
+
+---
+
+# 1.1 Tuân thủ nguyên tắc SOLID
+
+- Áp dụng các nguyên tắc thiết kế hướng đối tượng để tăng khả năng mở rộng và giảm phụ thuộc.
+- Bao gồm:
+  - **S – Single Responsibility:** Mỗi class chỉ nên có một lý do để thay đổi.
+  - **O – Open/Closed:** Code nên mở để mở rộng, đóng để chỉnh sửa trực tiếp.
+  - **L – Liskov Substitution:** Class con có thể thay thế class cha mà vẫn hoạt động đúng.
+  - **I – Interface Segregation:** Chia nhỏ interface, tránh interface “God Object”.
+  - **D – Dependency Inversion:** Phụ thuộc vào abstraction, không phụ thuộc implementation cụ thể.
+
+---
+
+# 1.2 Quy tắc Đặt Tên (Naming Convention)
+
+- Đặt tên rõ ràng, thống nhất theo một ngôn ngữ: **Tiếng Anh hoặc Tiếng Việt**, không trộn lẫn trong toàn project.
+- **Class, Method:** dùng PascalCase (ví dụ: `UserService`, `LoadData()`).
+- **Biến:** dùng camelCase (`userName`, `totalCount`).
+- **Const:** dùng UPPER_CASE (`MAX_RETRY`).
+- Tránh viết tắt khó hiểu (`usrNm`, `tpCnn`).
+
+---
+
+# 1.3 Separation of Concerns – Tách biệt Logic & UI
+
+- Tuyệt đối không viết logic xử lý nghiệp vụ trong WinForm (Form chỉ dùng để tương tác UI).
+- Logic nên được đưa vào:
+  - Các lớp **Service**
+  - Các lớp **Repository**
+  - Các lớp **Model**
+- UI chỉ:
+  - Lấy input
+  - Gọi service
+  - Hiển thị kết quả
+
+Cách này giúp code dễ bảo trì, dễ test và giảm phụ thuộc giữa các lớp.
+
+---
+
+# 1.4 Sử dụng Async/Await cho IO & Database
+
+- Các tác vụ có độ trễ như:
+  - Database
+  - File IO
+  - API call
+  - Network request  
+  phải dùng **async/await** để tránh đứng giao diện WinForm.
+
+- Tránh dùng:
+  - `.Result`
+  - `.Wait()`
+  vì có thể gây deadlock giao diện.
+
+- Event handlers nên khai báo:  
+  `async void btnLoad_Click(object sender, EventArgs e)`
+
+- Ví dụ:
+  ```csharp
+  async void btnLoad_Click(object sender, EventArgs e)
+  {
+      var data = await dataService.GetDataAsync();
+      DisplayData(data);
+  }
