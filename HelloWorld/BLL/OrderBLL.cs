@@ -81,6 +81,9 @@ namespace helloworld
         /// </summary>
         public async Task<int> AddOrderAsync(Order order)
         {
+            // Tự động gán người tạo là user hiện tại
+            order.UserId = UserSession.GetCurrentUserId();
+
             // Validate
             if (string.IsNullOrWhiteSpace(order.OrderCode))
             {
@@ -89,7 +92,7 @@ namespace helloworld
 
             if (order.UserId <= 0)
             {
-                throw new ArgumentException("Mã nhân viên không hợp lệ.");
+                throw new ArgumentException("Chưa đăng nhập hoặc mã nhân viên không hợp lệ.");
             }
 
             return await orderDAL.AddOrderAsync(order);
@@ -423,6 +426,35 @@ namespace helloworld
         public async Task RecalculateVariantStockAsync(int variantId)
         {
             await orderDAL.RecalculateVariantStockAsync(variantId);
+        }
+        /// <summary>
+        /// Kiểm tra quyền sửa hóa đơn
+        /// </summary>
+        public bool CanEditOrder(Order order)
+        {
+            if (order == null) return false;
+
+            // Admin có quyền sửa tất cả (Order_Edit_Others)
+            if (UserSession.IsAdmin())
+            {
+                return true;
+            }
+
+            // Nhân viên chỉ được sửa hóa đơn của chính mình (Order_Edit_Own)
+            if (UserSession.HasPermission(Common.PermissionConstants.Order_Edit_Own))
+            {
+                return order.UserId == UserSession.GetCurrentUserId();
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Lấy doanh thu 7 ngày gần nhất
+        /// </summary>
+        public async Task<DataTable> GetRevenueLast7DaysAsync()
+        {
+            return await orderDAL.GetRevenueLast7DaysAsync();
         }
     }
 }

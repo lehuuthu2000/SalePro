@@ -4,6 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
+using helloworld.DAL;
 
 namespace helloworld
 {
@@ -13,11 +14,11 @@ namespace helloworld
     /// </summary>
     internal class ProductDAL
     {
-        private ConnectDatabase database;
+        private DatabaseContext database;
 
         public ProductDAL()
         {
-            database = new ConnectDatabase();
+            database = new DatabaseContext();
         }
 
         /// <summary>
@@ -641,6 +642,26 @@ namespace helloworld
             {
                 throw new Exception($"Lỗi khi xóa sản phẩm: {ex.Message}", ex);
             }
+        }
+        /// <summary>
+        /// Lấy ProductId theo ProductCode
+        /// </summary>
+        public async Task<int> GetProductIdByCodeAsync(string productCode)
+        {
+             return await database.ExecuteWithConnectionAsync(async connection =>
+             {
+                 string query = "SELECT product_id FROM Products WHERE product_code = @code";
+                 using (MySqlCommand command = new MySqlCommand(query, connection))
+                 {
+                     command.Parameters.AddWithValue("@code", productCode);
+                     object result = await command.ExecuteScalarAsync();
+                     if (result != null && result != DBNull.Value)
+                     {
+                         return Convert.ToInt32(result);
+                     }
+                     return 0;
+                 }
+             });
         }
     }
 }

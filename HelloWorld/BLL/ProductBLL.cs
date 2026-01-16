@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace helloworld
@@ -316,6 +317,85 @@ namespace helloworld
                 result = result.Replace(vietnameseChars[i].ToUpper(), replacementChars[i].ToUpper());
             }
             return result;
+        }
+        /// <summary>
+        /// Import products from DataTable (Excel)
+        /// Columns: ProductCode, ProductName, CategoryId, Description, SKU, Size, Color, ImportPrice, SellingPrice, Stock
+        /// </summary>
+        public async Task<(int success, int failed, List<string> errors)> ImportProductsFromExcelAsync(DataTable dt)
+        {
+            int success = 0;
+            int failed = 0;
+            List<string> errors = new List<string>();
+
+            // Group by ProductCode
+            var grouped = dt.AsEnumerable()
+                .Where(row => !string.IsNullOrWhiteSpace(row["ProductCode"]?.ToString()))
+                .GroupBy(row => row["ProductCode"].ToString());
+
+            foreach (var group in grouped)
+            {
+                string productCode = group.Key;
+                try
+                {
+                    // Basic product info from first row
+                    DataRow firstRow = group.First();
+                    string productName = firstRow["ProductName"]?.ToString() ?? "Unnamed Product";
+                    int categoryId = 1; // Default
+                    if (firstRow.Table.Columns.Contains("CategoryId") && int.TryParse(firstRow["CategoryId"]?.ToString(), out int cId))
+                    {
+                        categoryId = cId;
+                    }
+                    string desc = firstRow.Table.Columns.Contains("Description") ? firstRow["Description"]?.ToString() : "";
+
+                    // Check if product exists by Code
+                    // Need a method in DAL to check/get ID by Code.
+                    // For now, try to Add, if duplicate code -> Exception or specific check?
+                    // Currently AddProductAsync logic in DAL probably inserts.
+                    // Let's assume we create new if not exists, or get ID if exists.
+                    // But standard AddProductAsync fails if code exists (Unique constraint usually).
+                    
+                    // We need CheckProductExistsAsync(code)
+                    int productId = await productDAL.GetProductIdByCodeAsync(productCode);
+                    
+                    if (productId == 0)
+                    {
+                        // Create new product
+                        productId = await AddProductAsync(productCode, productName, categoryId, desc, null, true);
+                    }
+
+                    // Add variants
+                    foreach (var row in group)
+                    {
+                        string sku = row["SKU"]?.ToString();
+                        if (string.IsNullOrWhiteSpace(sku)) sku = productCode + "-" + Guid.NewGuid().ToString().Substring(0, 4);
+
+                        string size = row.Table.Columns.Contains("Size") ? row["Size"]?.ToString() : null;
+                        string color = row.Table.Columns.Contains("Color") ? row["Color"]?.ToString() : null;
+                        
+                        decimal importPrice = 0;
+                        if (row.Table.Columns.Contains("ImportPrice")) decimal.TryParse(row["ImportPrice"]?.ToString(), out importPrice);
+                        
+                        decimal sellingPrice = 0;
+                        if (row.Table.Columns.Contains("SellingPrice")) decimal.TryParse(row["SellingPrice"]?.ToString(), out sellingPrice);
+
+                        int stock = 0;
+                        if (row.Table.Columns.Contains("Stock")) int.TryParse(row["Stock"]?.ToString(), out stock);
+
+                        // Check if variant SKU exists?
+                        // AddProductVariantAsync usually adds.
+                        await AddProductVariantAsync(productId, sku, size, color, importPrice, sellingPrice, stock, null, true);
+                    }
+                    success++;
+                }
+                catch (Exception ex)
+                {
+                    failed++;
+                    errors.Add($"Product {productCode}: {ex.Message}");
+                }
+            }
+
+            return (success, failed, errors);
         }
     }
 }

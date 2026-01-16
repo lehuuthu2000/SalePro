@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
+using helloworld.DAL;
 
 namespace helloworld
 {
@@ -12,11 +13,11 @@ namespace helloworld
     /// </summary>
     internal class CustomerDAL
     {
-        private ConnectDatabase database;
+        private DatabaseContext database;
 
         public CustomerDAL()
         {
-            database = new ConnectDatabase();
+            database = new DatabaseContext();
         }
 
         /// <summary>

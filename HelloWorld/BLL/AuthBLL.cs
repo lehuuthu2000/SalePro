@@ -4,6 +4,7 @@ using System.Net.Mail;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using helloworld.Services;
 
 namespace helloworld
 {
@@ -16,11 +17,13 @@ namespace helloworld
     {
         private AuthDAL authDAL;
         private UserDAL userDAL;
+        private SecurityService securityService;
 
         public AuthBLL()
         {
             authDAL = new AuthDAL();
             userDAL = new UserDAL();
+            securityService = new SecurityService();
         }
 
         /// <summary>
@@ -57,13 +60,11 @@ namespace helloworld
         }
 
         /// <summary>
-        /// Xác minh mật khẩu (tạm thời so sánh trực tiếp, nên thay bằng hash trong production)
+        /// Xác minh mật khẩu safe
         /// </summary>
         private bool VerifyPassword(string inputPassword, string storedPassword)
         {
-            // Tạm thời so sánh trực tiếp (không an toàn cho production)
-            // Trong production nên sử dụng BCrypt hoặc SHA256
-            return inputPassword == storedPassword;
+            return securityService.VerifyPassword(inputPassword, storedPassword);
         }
 
         /// <summary>
@@ -135,7 +136,7 @@ namespace helloworld
                 fullName = username;
             }
 
-            await userDAL.RegisterUserAsync(username, password, fullName, email);
+            await userDAL.RegisterUserAsync(username, securityService.HashPassword(password), fullName, email);
         }
 
         /// <summary>
@@ -209,7 +210,7 @@ namespace helloworld
                 await SendPasswordResetEmailAsync(user.Email, user.FullName, user.Username, newPassword);
 
                 // Cập nhật mật khẩu mới vào database
-                await userDAL.UpdatePasswordAsync(user.UserId, newPassword);
+                await userDAL.UpdatePasswordAsync(user.UserId, securityService.HashPassword(newPassword));
             }
             catch (ArgumentException)
             {

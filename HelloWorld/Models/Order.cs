@@ -12,6 +12,7 @@ namespace helloworld
         public string OrderCode { get; set; } = string.Empty;
         public int? CustomerId { get; set; }
         public int UserId { get; set; }
+        public string CreatorName { get; set; } = string.Empty;
         public decimal Tax { get; set; } = 0;
         public decimal TotalAmount { get; set; }
         public decimal DiscountAmount { get; set; } = 0;
@@ -20,6 +21,8 @@ namespace helloworld
         public string? ShippingAddress { get; set; }
         public string? BillingAddress { get; set; }
         public string? Note { get; set; }
+        public DateTime CreatedAt { get; set; }
+        public DateTime UpdatedAt { get; set; }
     }
 
     /// <summary>

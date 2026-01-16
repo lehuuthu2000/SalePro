@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using helloworld.DAL;
 
 namespace helloworld
 {
@@ -177,7 +178,7 @@ namespace helloworld
                     row.Cells["Mã DM"].Value = newCategoryId;
                     
                     // Cập nhật ngày tạo và ngày cập nhật
-                    ConnectDatabase db = new ConnectDatabase();
+                    DatabaseContext db = new DatabaseContext();
                     try
                     {
                         var connection = await db.OpenConnectionAsync();
@@ -208,7 +209,7 @@ namespace helloworld
 
                     // Cập nhật lại cột "Ngày cập nhật" trong DataGridView
                     isUpdating = true;
-                    ConnectDatabase db = new ConnectDatabase();
+                    DatabaseContext db = new DatabaseContext();
                     try
                     {
                         var connection = await db.OpenConnectionAsync();

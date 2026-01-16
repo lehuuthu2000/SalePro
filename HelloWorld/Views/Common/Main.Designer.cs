@@ -40,7 +40,6 @@
             tableLayoutPanel1 = new TableLayoutPanel();
             buttonDangXuat = new Button();
             buttonCaiDat = new Button();
-            pictureBox7 = new PictureBox();
             pictureBox8 = new PictureBox();
             buttonSanPham = new Button();
             buttonHoaDon = new Button();
@@ -56,7 +55,6 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panelMenu.SuspendLayout();
             tableLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox7).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox8).BeginInit();
             SuspendLayout();
             // 
@@ -167,7 +165,6 @@
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
             tableLayoutPanel1.Controls.Add(buttonDangXuat, 1, 1);
             tableLayoutPanel1.Controls.Add(buttonCaiDat, 1, 0);
-            tableLayoutPanel1.Controls.Add(pictureBox7, 0, 0);
             tableLayoutPanel1.Controls.Add(pictureBox8, 0, 1);
             tableLayoutPanel1.Dock = DockStyle.Bottom;
             tableLayoutPanel1.Location = new Point(0, 515);
@@ -204,17 +201,6 @@
             buttonCaiDat.TextAlign = ContentAlignment.MiddleLeft;
             buttonCaiDat.UseVisualStyleBackColor = true;
             buttonCaiDat.Click += buttonCaiDat_Click_1;
-            // 
-            // pictureBox7
-            // 
-            pictureBox7.Dock = DockStyle.Fill;
-            pictureBox7.Image = Properties.Resources.settings;
-            pictureBox7.Location = new Point(3, 3);
-            pictureBox7.Name = "pictureBox7";
-            pictureBox7.Size = new Size(44, 34);
-            pictureBox7.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox7.TabIndex = 0;
-            pictureBox7.TabStop = false;
             // 
             // pictureBox8
             // 
@@ -309,7 +295,6 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             panelMenu.ResumeLayout(false);
             tableLayoutPanel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)pictureBox7).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox8).EndInit();
             ResumeLayout(false);
         }
@@ -331,7 +316,6 @@
         private TableLayoutPanel tableLayoutPanel1;
         private Button buttonDangXuat;
         private Button buttonCaiDat;
-        private PictureBox pictureBox7;
         private PictureBox pictureBox8;
     }
 }

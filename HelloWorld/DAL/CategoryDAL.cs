@@ -2,6 +2,7 @@ using System;
 using System.Data;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
+using helloworld.DAL;
 
 namespace helloworld
 {
@@ -11,11 +12,11 @@ namespace helloworld
     /// </summary>
     internal class CategoryDAL
     {
-        private ConnectDatabase database;
+        private DatabaseContext database;
 
         public CategoryDAL()
         {
-            database = new ConnectDatabase();
+            database = new DatabaseContext();
         }
 
         /// <summary>

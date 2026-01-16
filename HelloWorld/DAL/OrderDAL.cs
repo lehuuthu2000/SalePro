@@ -1,26 +1,27 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
+using helloworld.DAL;
 
 namespace helloworld
 {
     /// <summary>
-    /// Data Access Layer cho Orders và OrderDetails
-    /// Chỉ chứa các thao tác database, không có business logic
+    /// Data Access Layer cho Orders vÃ  OrderDetails
+    /// Chá»‰ chá»©a cÃ¡c thao tÃ¡c database, khÃ´ng cÃ³ business logic
     /// </summary>
     internal class OrderDAL
     {
-        private ConnectDatabase database;
+        private DatabaseContext database;
 
         public OrderDAL()
         {
-            database = new ConnectDatabase();
+            database = new DatabaseContext();
         }
 
         /// <summary>
-        /// Lấy danh sách hóa đơn từ bảng Orders
+        /// Láº¥y danh sÃ¡ch hÃ³a Ä‘Æ¡n tá»« báº£ng Orders
         /// </summary>
         public async Task<DataTable> LoadOrdersAsync()
         {
@@ -32,15 +33,18 @@ namespace helloworld
 
                     string query = @"
                         SELECT 
-                            order_id AS 'Mã HĐ',
-                            order_code AS 'Mã hóa đơn',
-                            customer_id AS 'Mã KH',
-                            user_id AS 'Mã NV',
-                            total_amount AS 'Tổng tiền',
-                            discount_amount AS 'Giảm giá',
-                            status AS 'Trạng thái'
-                        FROM Orders
-                        ORDER BY created_at DESC";
+                            o.order_id AS 'Mã HĐ',
+                            o.order_code AS 'Mã hóa đơn',
+                            c.full_name AS 'Khách hàng',
+                            u.full_name AS 'Người tạo',
+                            o.total_amount AS 'Tổng tiền',
+                            o.discount_amount AS 'Giảm giá',
+                            o.status AS 'Trạng thái',
+                            o.user_id 
+                        FROM Orders o
+                        LEFT JOIN Customers c ON o.customer_id = c.customer_id
+                        LEFT JOIN Users u ON o.user_id = u.user_id
+                        ORDER BY o.created_at DESC";
 
                     using (MySqlCommand command = new MySqlCommand(query, connection))
                     {
@@ -54,12 +58,12 @@ namespace helloworld
             }
             catch (Exception ex)
             {
-                throw new Exception($"Lỗi khi tải danh sách hóa đơn: {ex.Message}", ex);
+                throw new Exception($"Lá»—i khi táº£i danh sÃ¡ch hÃ³a Ä‘Æ¡n: {ex.Message}", ex);
             }
         }
 
         /// <summary>
-        /// Lấy số lượng hóa đơn trong ngày để tạo mã hóa đơn
+        /// Láº¥y sá»‘ lÆ°á»£ng hÃ³a Ä‘Æ¡n trong ngÃ y Ä‘á»ƒ táº¡o mÃ£ hÃ³a Ä‘Æ¡n
         /// </summary>
         public async Task<int> GetTodayOrderCountAsync()
         {
@@ -81,12 +85,12 @@ namespace helloworld
             }
             catch (Exception ex)
             {
-                throw new Exception($"Lỗi khi lấy số lượng hóa đơn: {ex.Message}", ex);
+                throw new Exception($"Lá»—i khi láº¥y sá»‘ lÆ°á»£ng hÃ³a Ä‘Æ¡n: {ex.Message}", ex);
             }
         }
 
         /// <summary>
-        /// Lấy thông tin khách hàng theo ID
+        /// Láº¥y thÃ´ng tin khÃ¡ch hÃ ng theo ID
         /// </summary>
         public async Task<Customer?> GetCustomerByIdAsync(int customerId)
         {
@@ -127,12 +131,12 @@ namespace helloworld
             }
             catch (Exception ex)
             {
-                throw new Exception($"Lỗi khi tìm khách hàng: {ex.Message}", ex);
+                throw new Exception($"Lá»—i khi tÃ¬m khÃ¡ch hÃ ng: {ex.Message}", ex);
             }
         }
 
         /// <summary>
-        /// Lấy thông tin khách hàng theo số điện thoại
+        /// Láº¥y thÃ´ng tin khÃ¡ch hÃ ng theo sá»‘ Ä‘iá»‡n thoáº¡i
         /// </summary>
         public async Task<Customer?> GetCustomerByPhoneAsync(string phoneNumber)
         {
@@ -173,12 +177,12 @@ namespace helloworld
             }
             catch (Exception ex)
             {
-                throw new Exception($"Lỗi khi tìm khách hàng: {ex.Message}", ex);
+                throw new Exception($"Lá»—i khi tÃ¬m khÃ¡ch hÃ ng: {ex.Message}", ex);
             }
         }
 
         /// <summary>
-        /// Lấy thông tin variant theo ID (không kiểm tra is_active - dùng cho load hóa đơn cũ)
+        /// Láº¥y thÃ´ng tin variant theo ID (khÃ´ng kiá»ƒm tra is_active - dÃ¹ng cho load hÃ³a Ä‘Æ¡n cÅ©)
         /// </summary>
         public async Task<ProductVariantInfo?> GetVariantInfoByIdAsync(int variantId)
         {
@@ -230,12 +234,12 @@ namespace helloworld
             }
             catch (Exception ex)
             {
-                throw new Exception($"Lỗi khi lấy thông tin variant (VariantId: {variantId}): {ex.Message}", ex);
+                throw new Exception($"Lá»—i khi láº¥y thÃ´ng tin variant (VariantId: {variantId}): {ex.Message}", ex);
             }
         }
 
         /// <summary>
-        /// Lấy danh sách ProductVariants có sẵn để bán
+        /// Láº¥y danh sÃ¡ch ProductVariants cÃ³ sáºµn Ä‘á»ƒ bÃ¡n
         /// </summary>
         public async Task<List<ProductVariantInfo>> GetProductVariantsAsync()
         {
@@ -283,12 +287,12 @@ namespace helloworld
             }
             catch (Exception ex)
             {
-                throw new Exception($"Lỗi khi lấy danh sách sản phẩm: {ex.Message}", ex);
+                throw new Exception($"Lá»—i khi láº¥y danh sÃ¡ch sáº£n pháº©m: {ex.Message}", ex);
             }
         }
 
         /// <summary>
-        /// Thêm hóa đơn mới vào database
+        /// ThÃªm hÃ³a Ä‘Æ¡n má»›i vÃ o database
         /// </summary>
         public async Task<int> AddOrderAsync(Order order)
         {
@@ -331,18 +335,18 @@ namespace helloworld
                         {
                             return orderId;
                         }
-                        throw new Exception("Không thể lấy Order ID sau khi thêm hóa đơn.");
+                        throw new Exception("KhÃ´ng thá»ƒ láº¥y Order ID sau khi thÃªm hÃ³a Ä‘Æ¡n.");
                     }
                 });
             }
             catch (Exception ex)
             {
-                throw new Exception($"Lỗi khi thêm hóa đơn: {ex.Message}", ex);
+                throw new Exception($"Lá»—i khi thÃªm hÃ³a Ä‘Æ¡n: {ex.Message}", ex);
             }
         }
 
         /// <summary>
-        /// Thêm chi tiết hóa đơn vào database
+        /// ThÃªm chi tiáº¿t hÃ³a Ä‘Æ¡n vÃ o database
         /// </summary>
         public async Task AddOrderDetailAsync(OrderDetail orderDetail)
         {
@@ -368,12 +372,12 @@ namespace helloworld
             }
             catch (Exception ex)
             {
-                throw new Exception($"Lỗi khi thêm chi tiết hóa đơn: {ex.Message}", ex);
+                throw new Exception($"Lá»—i khi thÃªm chi tiáº¿t hÃ³a Ä‘Æ¡n: {ex.Message}", ex);
             }
         }
 
         /// <summary>
-        /// Thêm nhiều chi tiết hóa đơn cùng lúc (transaction)
+        /// ThÃªm nhiá»u chi tiáº¿t hÃ³a Ä‘Æ¡n cÃ¹ng lÃºc (transaction)
         /// </summary>
         public async Task AddOrderDetailsAsync(List<OrderDetail> orderDetails)
         {
@@ -420,12 +424,12 @@ namespace helloworld
             }
             catch (Exception ex)
             {
-                throw new Exception($"Lỗi khi thêm chi tiết hóa đơn: {ex.Message}", ex);
+                throw new Exception($"Lá»—i khi thÃªm chi tiáº¿t hÃ³a Ä‘Æ¡n: {ex.Message}", ex);
             }
         }
 
         /// <summary>
-        /// Lấy thông tin hóa đơn theo Order ID
+        /// Láº¥y thÃ´ng tin hÃ³a Ä‘Æ¡n theo Order ID
         /// </summary>
         public async Task<Order?> GetOrderByIdAsync(int orderId)
         {
@@ -440,11 +444,12 @@ namespace helloworld
                 {
                     string query = @"
                         SELECT 
-                            order_id, order_code, customer_id, user_id, tax, 
-                            total_amount, discount_amount, payment_method, status,
-                            shipping_address, billing_address, note, created_at, updated_at
-                        FROM Orders
-                        WHERE order_id = @order_id";
+                            o.order_id, o.order_code, o.customer_id, o.user_id, u.full_name as creator_name, o.tax, 
+                            o.total_amount, o.discount_amount, o.payment_method, o.status,
+                            o.shipping_address, o.billing_address, o.note, o.created_at, o.updated_at
+                        FROM Orders o
+                        LEFT JOIN Users u ON o.user_id = u.user_id
+                        WHERE o.order_id = @order_id";
 
                     using (MySqlCommand command = new MySqlCommand(query, connection))
                     {
@@ -460,6 +465,7 @@ namespace helloworld
                                     OrderCode = reader.GetString("order_code"),
                                     CustomerId = reader.IsDBNull("customer_id") ? null : reader.GetInt32("customer_id"),
                                     UserId = reader.GetInt32("user_id"),
+                                    CreatorName = reader.IsDBNull("creator_name") ? string.Empty : reader.GetString("creator_name"),
                                     Tax = reader.GetDecimal("tax"),
                                     TotalAmount = reader.GetDecimal("total_amount"),
                                     DiscountAmount = reader.GetDecimal("discount_amount"),
@@ -477,12 +483,12 @@ namespace helloworld
             }
             catch (Exception ex)
             {
-                throw new Exception($"Lỗi khi lấy thông tin hóa đơn: {ex.Message}", ex);
+                throw new Exception($"Lá»—i khi láº¥y thÃ´ng tin hÃ³a Ä‘Æ¡n: {ex.Message}", ex);
             }
         }
 
         /// <summary>
-        /// Lấy thông tin hóa đơn kèm ngày tạo và ngày cập nhật
+        /// Láº¥y thÃ´ng tin hÃ³a Ä‘Æ¡n kÃ¨m ngÃ y táº¡o vÃ  ngÃ y cáº­p nháº­t
         /// </summary>
         public async Task<OrderWithDates?> GetOrderWithDatesAsync(int orderId)
         {
@@ -521,12 +527,12 @@ namespace helloworld
             }
             catch (Exception ex)
             {
-                throw new Exception($"Lỗi khi lấy ngày tạo/cập nhật hóa đơn: {ex.Message}", ex);
+                throw new Exception($"Lá»—i khi láº¥y ngÃ y táº¡o/cáº­p nháº­t hÃ³a Ä‘Æ¡n: {ex.Message}", ex);
             }
         }
 
         /// <summary>
-        /// Lấy danh sách chi tiết hóa đơn theo Order ID
+        /// Láº¥y danh sÃ¡ch chi tiáº¿t hÃ³a Ä‘Æ¡n theo Order ID
         /// </summary>
         public async Task<List<OrderDetail>> GetOrderDetailsByOrderIdAsync(int orderId)
         {
@@ -579,17 +585,17 @@ namespace helloworld
             }
             catch (MySqlException ex)
             {
-                throw new Exception($"Lỗi MySQL khi lấy chi tiết hóa đơn (OrderId: {orderId}): {ex.Message} (Error Code: {ex.Number})", ex);
+                throw new Exception($"Lá»—i MySQL khi láº¥y chi tiáº¿t hÃ³a Ä‘Æ¡n (OrderId: {orderId}): {ex.Message} (Error Code: {ex.Number})", ex);
             }
             catch (Exception ex)
             {
-                throw new Exception($"Lỗi khi lấy chi tiết hóa đơn (OrderId: {orderId}): {ex.Message}", ex);
+                throw new Exception($"Lá»—i khi láº¥y chi tiáº¿t hÃ³a Ä‘Æ¡n (OrderId: {orderId}): {ex.Message}", ex);
             }
         }
 
         /// <summary>
-        /// Cập nhật số lượng tồn kho của variant (giảm khi bán)
-        /// Đảm bảo không bị âm khi trừ đi
+        /// Cáº­p nháº­t sá»‘ lÆ°á»£ng tá»“n kho cá»§a variant (giáº£m khi bÃ¡n)
+        /// Äáº£m báº£o khÃ´ng bá»‹ Ã¢m khi trá»« Ä‘i
         /// </summary>
         public async Task UpdateVariantStockAsync(int variantId, int quantity)
         {
@@ -618,13 +624,13 @@ namespace helloworld
             }
             catch (Exception ex)
             {
-                throw new Exception($"Lỗi khi cập nhật tồn kho (VariantId: {variantId}): {ex.Message}", ex);
+                throw new Exception($"Lá»—i khi cáº­p nháº­t tá»“n kho (VariantId: {variantId}): {ex.Message}", ex);
             }
         }
 
         /// <summary>
-        /// Cập nhật số tiền bán và số lượng bán của variant
-        /// Đảm bảo không bị âm khi trừ đi
+        /// Cáº­p nháº­t sá»‘ tiá»n bÃ¡n vÃ  sá»‘ lÆ°á»£ng bÃ¡n cá»§a variant
+        /// Äáº£m báº£o khÃ´ng bá»‹ Ã¢m khi trá»« Ä‘i
         /// </summary>
         public async Task UpdateVariantSalesAsync(int variantId, int quantity, decimal amount)
         {
@@ -656,16 +662,16 @@ namespace helloworld
             }
             catch (MySqlException ex) when (ex.Number == 1054) // Unknown column
             {
-                // Nếu cột chưa tồn tại, bỏ qua (người dùng cần chạy script SQL trước)
+                // Náº¿u cá»™t chÆ°a tá»“n táº¡i, bá» qua (ngÆ°á»i dÃ¹ng cáº§n cháº¡y script SQL trÆ°á»›c)
             }
             catch (Exception ex)
             {
-                throw new Exception($"Lỗi khi cập nhật số liệu bán hàng (VariantId: {variantId}): {ex.Message}", ex);
+                throw new Exception($"Lá»—i khi cáº­p nháº­t sá»‘ liá»‡u bÃ¡n hÃ ng (VariantId: {variantId}): {ex.Message}", ex);
             }
         }
 
         /// <summary>
-        /// Lấy trạng thái cũ của hóa đơn
+        /// Láº¥y tráº¡ng thÃ¡i cÅ© cá»§a hÃ³a Ä‘Æ¡n
         /// </summary>
         public async Task<string?> GetOldOrderStatusAsync(int orderId)
         {
@@ -690,7 +696,7 @@ namespace helloworld
         }
 
         /// <summary>
-        /// Cập nhật thông tin hóa đơn
+        /// Cáº­p nháº­t thÃ´ng tin hÃ³a Ä‘Æ¡n
         /// </summary>
         public async Task UpdateOrderAsync(Order order)
         {
@@ -732,19 +738,19 @@ namespace helloworld
                         int rowsAffected = await command.ExecuteNonQueryAsync();
                         if (rowsAffected == 0)
                         {
-                            throw new Exception("Không tìm thấy hóa đơn để cập nhật.");
+                            throw new Exception("KhÃ´ng tÃ¬m tháº¥y hÃ³a Ä‘Æ¡n Ä‘á»ƒ cáº­p nháº­t.");
                         }
                     }
                 });
             }
             catch (Exception ex)
             {
-                throw new Exception($"Lỗi khi cập nhật hóa đơn: {ex.Message}", ex);
+                throw new Exception($"Lá»—i khi cáº­p nháº­t hÃ³a Ä‘Æ¡n: {ex.Message}", ex);
             }
         }
 
         /// <summary>
-        /// Xóa tất cả chi tiết hóa đơn theo Order ID
+        /// XÃ³a táº¥t cáº£ chi tiáº¿t hÃ³a Ä‘Æ¡n theo Order ID
         /// </summary>
         public async Task DeleteOrderDetailsAsync(int orderId)
         {
@@ -768,30 +774,30 @@ namespace helloworld
             }
             catch (Exception ex)
             {
-                throw new Exception($"Lỗi khi xóa chi tiết hóa đơn: {ex.Message}", ex);
+                throw new Exception($"Lá»—i khi xÃ³a chi tiáº¿t hÃ³a Ä‘Æ¡n: {ex.Message}", ex);
             }
         }
 
         /// <summary>
-        /// Xóa hóa đơn (xóa cả OrderDetails và Order)
+        /// XÃ³a hÃ³a Ä‘Æ¡n (xÃ³a cáº£ OrderDetails vÃ  Order)
         /// </summary>
         public async Task DeleteOrderAsync(int orderId)
         {
             if (orderId <= 0)
             {
-                throw new ArgumentException("Order ID không hợp lệ.");
+                throw new ArgumentException("Order ID khÃ´ng há»£p lá»‡.");
             }
 
             try
             {
                 await database.ExecuteWithConnectionAsync(async connection =>
                 {
-                    // Sử dụng transaction để đảm bảo tính toàn vẹn dữ liệu
+                    // Sá»­ dá»¥ng transaction Ä‘á»ƒ Ä‘áº£m báº£o tÃ­nh toÃ n váº¹n dá»¯ liá»‡u
                     using (var transaction = await connection.BeginTransactionAsync())
                     {
                         try
                         {
-                            // Xóa OrderDetails trước (do foreign key constraint)
+                            // XÃ³a OrderDetails trÆ°á»›c (do foreign key constraint)
                             string deleteDetailsQuery = "DELETE FROM OrderDetails WHERE order_id = @order_id";
                             using (MySqlCommand command = new MySqlCommand(deleteDetailsQuery, connection, transaction))
                             {
@@ -799,25 +805,22 @@ namespace helloworld
                                 await command.ExecuteNonQueryAsync();
                             }
 
-                            // Xóa Order
+                            // XÃ³a Order
                             string deleteOrderQuery = "DELETE FROM Orders WHERE order_id = @order_id";
                             using (MySqlCommand command = new MySqlCommand(deleteOrderQuery, connection, transaction))
                             {
                                 command.Parameters.AddWithValue("@order_id", orderId);
                                 int rowsAffected = await command.ExecuteNonQueryAsync();
-                                
                                 if (rowsAffected == 0)
                                 {
-                                    throw new Exception("Không tìm thấy hóa đơn để xóa.");
+                                    throw new Exception("KhÃ´ng tÃ¬m tháº¥y hÃ³a Ä‘Æ¡n Ä‘á»ƒ xÃ³a.");
                                 }
                             }
 
-                            // Commit transaction
                             await transaction.CommitAsync();
                         }
                         catch
                         {
-                            // Rollback nếu có lỗi
                             await transaction.RollbackAsync();
                             throw;
                         }
@@ -826,7 +829,41 @@ namespace helloworld
             }
             catch (Exception ex)
             {
-                throw new Exception($"Lỗi khi xóa hóa đơn: {ex.Message}", ex);
+                throw new Exception($"Lá»—i khi xÃ³a hÃ³a Ä‘Æ¡n: {ex.Message}", ex);
+            }
+        }
+
+        /// <summary>
+        /// Láº¥y doanh thu 7 ngÃ y gáº§n nháº¥t
+        /// </summary>
+        public async Task<DataTable> GetRevenueLast7DaysAsync()
+        {
+            try
+            {
+                return await database.ExecuteWithConnectionAsync(async connection =>
+                {
+                    string query = @"
+                        SELECT DATE(created_at) as date, SUM(total_amount) as total
+                        FROM Orders
+                        WHERE created_at >= DATE_SUB(CURDATE(), INTERVAL 7 DAY) 
+                        AND status = 'Completed'
+                        GROUP BY DATE(created_at)
+                        ORDER BY DATE(created_at)";
+
+                    DataTable dt = new DataTable();
+                    using (MySqlCommand command = new MySqlCommand(query, connection))
+                    {
+                        using (MySqlDataAdapter adapter = new MySqlDataAdapter(command))
+                        {
+                            adapter.Fill(dt);
+                        }
+                    }
+                    return dt;
+                });
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Lá»—i khi láº¥y doanh thu 7 ngÃ y: {ex.Message}", ex);
             }
         }
 
@@ -1055,7 +1092,7 @@ namespace helloworld
                         FROM Orders o
                         LEFT JOIN Customers c ON o.customer_id = c.customer_id
                         LEFT JOIN Users u ON o.user_id = u.user_id
-                        ORDER BY o.created_at DESC
+                        ORDER BY COALESCE(o.updated_at, o.created_at) DESC
                         LIMIT @limit";
 
                     using (MySqlCommand command = new MySqlCommand(query, connection))

@@ -455,6 +455,7 @@
             materialCard4.Padding = new Padding(14);
             materialCard4.Size = new Size(994, 312);
             materialCard4.TabIndex = 0;
+            materialCard4.AutoScroll = true;
             // 
             // tableLayoutPanelHoatDongGanDay
             // 
@@ -638,7 +639,7 @@
             label11.Name = "label11";
             label11.Size = new Size(167, 50);
             label11.TabIndex = 0;
-            label11.Text = "Cơ hội bán hàng";
+            label11.Text = "Doanh thu 7 ngày gần nhất";
             // 
             // ViewsTrangChu
             // 

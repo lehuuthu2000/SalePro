@@ -1,10 +1,14 @@
 {
   "version": 2,
-  "dgSpecHash": "0FJaKRMZNcg=",
+  "dgSpecHash": "EF7+3eoQaKg=",
   "success": true,
-  "projectFilePath": "C:\\Users\\lehuu\\source\\repos\\HelloWorld\\helloworld\\helloworld.csproj",
+  "projectFilePath": "C:\\Users\\lehuu\\source\\repos\\SalePro\\helloworld\\helloworld.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\lehuu\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
     "C:\\Users\\lehuu\\.nuget\\packages\\bouncycastle.cryptography\\2.6.2\\bouncycastle.cryptography.2.6.2.nupkg.sha512",
+    "C:\\Users\\lehuu\\.nuget\\packages\\epplus\\8.4.1\\epplus.8.4.1.nupkg.sha512",
+    "C:\\Users\\lehuu\\.nuget\\packages\\epplus.interfaces\\8.4.0\\epplus.interfaces.8.4.0.nupkg.sha512",
+    "C:\\Users\\lehuu\\.nuget\\packages\\fontawesome.sharp\\6.6.0\\fontawesome.sharp.6.6.0.nupkg.sha512",
     "C:\\Users\\lehuu\\.nuget\\packages\\google.protobuf\\3.32.0\\google.protobuf.3.32.0.nupkg.sha512",
     "C:\\Users\\lehuu\\.nuget\\packages\\harfbuzzsharp\\8.3.1.1\\harfbuzzsharp.8.3.1.1.nupkg.sha512",
     "C:\\Users\\lehuu\\.nuget\\packages\\harfbuzzsharp.nativeassets.linux\\8.3.1.1\\harfbuzzsharp.nativeassets.linux.8.3.1.1.nupkg.sha512",
@@ -20,6 +24,15 @@
     "C:\\Users\\lehuu\\.nuget\\packages\\metroframework.design\\1.2.0.3\\metroframework.design.1.2.0.3.nupkg.sha512",
     "C:\\Users\\lehuu\\.nuget\\packages\\metroframework.fonts\\1.2.0.3\\metroframework.fonts.1.2.0.3.nupkg.sha512",
     "C:\\Users\\lehuu\\.nuget\\packages\\metroframework.runtime\\1.2.0.3\\metroframework.runtime.1.2.0.3.nupkg.sha512",
+    "C:\\Users\\lehuu\\.nuget\\packages\\microsoft.extensions.configuration\\10.0.0\\microsoft.extensions.configuration.10.0.0.nupkg.sha512",
+    "C:\\Users\\lehuu\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\10.0.0\\microsoft.extensions.configuration.abstractions.10.0.0.nupkg.sha512",
+    "C:\\Users\\lehuu\\.nuget\\packages\\microsoft.extensions.configuration.fileextensions\\10.0.0\\microsoft.extensions.configuration.fileextensions.10.0.0.nupkg.sha512",
+    "C:\\Users\\lehuu\\.nuget\\packages\\microsoft.extensions.configuration.json\\10.0.0\\microsoft.extensions.configuration.json.10.0.0.nupkg.sha512",
+    "C:\\Users\\lehuu\\.nuget\\packages\\microsoft.extensions.fileproviders.abstractions\\10.0.0\\microsoft.extensions.fileproviders.abstractions.10.0.0.nupkg.sha512",
+    "C:\\Users\\lehuu\\.nuget\\packages\\microsoft.extensions.fileproviders.physical\\10.0.0\\microsoft.extensions.fileproviders.physical.10.0.0.nupkg.sha512",
+    "C:\\Users\\lehuu\\.nuget\\packages\\microsoft.extensions.filesystemglobbing\\10.0.0\\microsoft.extensions.filesystemglobbing.10.0.0.nupkg.sha512",
+    "C:\\Users\\lehuu\\.nuget\\packages\\microsoft.extensions.primitives\\10.0.0\\microsoft.extensions.primitives.10.0.0.nupkg.sha512",
+    "C:\\Users\\lehuu\\.nuget\\packages\\microsoft.io.recyclablememorystream\\3.0.1\\microsoft.io.recyclablememorystream.3.0.1.nupkg.sha512",
     "C:\\Users\\lehuu\\.nuget\\packages\\mysql.data\\9.5.0\\mysql.data.9.5.0.nupkg.sha512",
     "C:\\Users\\lehuu\\.nuget\\packages\\opentk\\3.1.0\\opentk.3.1.0.nupkg.sha512",
     "C:\\Users\\lehuu\\.nuget\\packages\\opentk.glcontrol\\3.1.0\\opentk.glcontrol.3.1.0.nupkg.sha512",
@@ -33,6 +46,7 @@
     "C:\\Users\\lehuu\\.nuget\\packages\\skiasharp.nativeassets.win32\\3.119.0\\skiasharp.nativeassets.win32.3.119.0.nupkg.sha512",
     "C:\\Users\\lehuu\\.nuget\\packages\\skiasharp.views.desktop.common\\3.119.0\\skiasharp.views.desktop.common.3.119.0.nupkg.sha512",
     "C:\\Users\\lehuu\\.nuget\\packages\\skiasharp.views.windowsforms\\3.119.0\\skiasharp.views.windowsforms.3.119.0.nupkg.sha512",
+    "C:\\Users\\lehuu\\.nuget\\packages\\system.componentmodel.annotations\\5.0.0\\system.componentmodel.annotations.5.0.0.nupkg.sha512",
     "C:\\Users\\lehuu\\.nuget\\packages\\zstdsharp.port\\0.8.6\\zstdsharp.port.0.8.6.nupkg.sha512"
   ],
   "logs": [
@@ -40,9 +54,9 @@
       "code": "NU1701",
       "level": "Warning",
       "message": "Package 'LiveCharts 0.9.7' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net10.0-windows7.0'. This package may not be fully compatible with your project.",
-      "projectPath": "C:\\Users\\lehuu\\source\\repos\\HelloWorld\\helloworld\\helloworld.csproj",
+      "projectPath": "C:\\Users\\lehuu\\source\\repos\\SalePro\\helloworld\\helloworld.csproj",
       "warningLevel": 1,
-      "filePath": "C:\\Users\\lehuu\\source\\repos\\HelloWorld\\helloworld\\helloworld.csproj",
+      "filePath": "C:\\Users\\lehuu\\source\\repos\\SalePro\\helloworld\\helloworld.csproj",
       "libraryId": "LiveCharts",
       "targetGraphs": [
         "net10.0-windows7.0"
@@ -52,9 +66,9 @@
       "code": "NU1701",
       "level": "Warning",
       "message": "Package 'LiveCharts.WinForms 0.9.7.1' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net10.0-windows7.0'. This package may not be fully compatible with your project.",
-      "projectPath": "C:\\Users\\lehuu\\source\\repos\\HelloWorld\\helloworld\\helloworld.csproj",
+      "projectPath": "C:\\Users\\lehuu\\source\\repos\\SalePro\\helloworld\\helloworld.csproj",
       "warningLevel": 1,
-      "filePath": "C:\\Users\\lehuu\\source\\repos\\HelloWorld\\helloworld\\helloworld.csproj",
+      "filePath": "C:\\Users\\lehuu\\source\\repos\\SalePro\\helloworld\\helloworld.csproj",
       "libraryId": "LiveCharts.WinForms",
       "targetGraphs": [
         "net10.0-windows7.0"
@@ -64,9 +78,9 @@
       "code": "NU1701",
       "level": "Warning",
       "message": "Package 'LiveCharts.Wpf 0.9.7' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net10.0-windows7.0'. This package may not be fully compatible with your project.",
-      "projectPath": "C:\\Users\\lehuu\\source\\repos\\HelloWorld\\helloworld\\helloworld.csproj",
+      "projectPath": "C:\\Users\\lehuu\\source\\repos\\SalePro\\helloworld\\helloworld.csproj",
       "warningLevel": 1,
-      "filePath": "C:\\Users\\lehuu\\source\\repos\\HelloWorld\\helloworld\\helloworld.csproj",
+      "filePath": "C:\\Users\\lehuu\\source\\repos\\SalePro\\helloworld\\helloworld.csproj",
       "libraryId": "LiveCharts.Wpf",
       "targetGraphs": [
         "net10.0-windows7.0"
@@ -76,9 +90,9 @@
       "code": "NU1701",
       "level": "Warning",
       "message": "Package 'MetroFramework.Design 1.2.0.3' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net10.0-windows7.0'. This package may not be fully compatible with your project.",
-      "projectPath": "C:\\Users\\lehuu\\source\\repos\\HelloWorld\\helloworld\\helloworld.csproj",
+      "projectPath": "C:\\Users\\lehuu\\source\\repos\\SalePro\\helloworld\\helloworld.csproj",
       "warningLevel": 1,
-      "filePath": "C:\\Users\\lehuu\\source\\repos\\HelloWorld\\helloworld\\helloworld.csproj",
+      "filePath": "C:\\Users\\lehuu\\source\\repos\\SalePro\\helloworld\\helloworld.csproj",
       "libraryId": "MetroFramework.Design",
       "targetGraphs": [
         "net10.0-windows7.0"
@@ -88,9 +102,9 @@
       "code": "NU1701",
       "level": "Warning",
       "message": "Package 'MetroFramework.Fonts 1.2.0.3' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net10.0-windows7.0'. This package may not be fully compatible with your project.",
-      "projectPath": "C:\\Users\\lehuu\\source\\repos\\HelloWorld\\helloworld\\helloworld.csproj",
+      "projectPath": "C:\\Users\\lehuu\\source\\repos\\SalePro\\helloworld\\helloworld.csproj",
       "warningLevel": 1,
-      "filePath": "C:\\Users\\lehuu\\source\\repos\\HelloWorld\\helloworld\\helloworld.csproj",
+      "filePath": "C:\\Users\\lehuu\\source\\repos\\SalePro\\helloworld\\helloworld.csproj",
       "libraryId": "MetroFramework.Fonts",
       "targetGraphs": [
         "net10.0-windows7.0"
@@ -100,9 +114,9 @@
       "code": "NU1701",
       "level": "Warning",
       "message": "Package 'MetroFramework.RunTime 1.2.0.3' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net10.0-windows7.0'. This package may not be fully compatible with your project.",
-      "projectPath": "C:\\Users\\lehuu\\source\\repos\\HelloWorld\\helloworld\\helloworld.csproj",
+      "projectPath": "C:\\Users\\lehuu\\source\\repos\\SalePro\\helloworld\\helloworld.csproj",
       "warningLevel": 1,
-      "filePath": "C:\\Users\\lehuu\\source\\repos\\HelloWorld\\helloworld\\helloworld.csproj",
+      "filePath": "C:\\Users\\lehuu\\source\\repos\\SalePro\\helloworld\\helloworld.csproj",
       "libraryId": "MetroFramework.RunTime",
       "targetGraphs": [
         "net10.0-windows7.0"
@@ -112,9 +126,9 @@
       "code": "NU1701",
       "level": "Warning",
       "message": "Package 'OpenTK 3.1.0' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net10.0-windows7.0'. This package may not be fully compatible with your project.",
-      "projectPath": "C:\\Users\\lehuu\\source\\repos\\HelloWorld\\helloworld\\helloworld.csproj",
+      "projectPath": "C:\\Users\\lehuu\\source\\repos\\SalePro\\helloworld\\helloworld.csproj",
       "warningLevel": 1,
-      "filePath": "C:\\Users\\lehuu\\source\\repos\\HelloWorld\\helloworld\\helloworld.csproj",
+      "filePath": "C:\\Users\\lehuu\\source\\repos\\SalePro\\helloworld\\helloworld.csproj",
       "libraryId": "OpenTK",
       "targetGraphs": [
         "net10.0-windows7.0"
@@ -124,9 +138,9 @@
       "code": "NU1701",
       "level": "Warning",
       "message": "Package 'OpenTK.GLControl 3.1.0' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net10.0-windows7.0'. This package may not be fully compatible with your project.",
-      "projectPath": "C:\\Users\\lehuu\\source\\repos\\HelloWorld\\helloworld\\helloworld.csproj",
+      "projectPath": "C:\\Users\\lehuu\\source\\repos\\SalePro\\helloworld\\helloworld.csproj",
       "warningLevel": 1,
-      "filePath": "C:\\Users\\lehuu\\source\\repos\\HelloWorld\\helloworld\\helloworld.csproj",
+      "filePath": "C:\\Users\\lehuu\\source\\repos\\SalePro\\helloworld\\helloworld.csproj",
       "libraryId": "OpenTK.GLControl",
       "targetGraphs": [
         "net10.0-windows7.0"
@@ -136,9 +150,9 @@
       "code": "NU1701",
       "level": "Warning",
       "message": "Package 'SkiaSharp.Views.WindowsForms 3.119.0' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net10.0-windows7.0'. This package may not be fully compatible with your project.",
-      "projectPath": "C:\\Users\\lehuu\\source\\repos\\HelloWorld\\helloworld\\helloworld.csproj",
+      "projectPath": "C:\\Users\\lehuu\\source\\repos\\SalePro\\helloworld\\helloworld.csproj",
       "warningLevel": 1,
-      "filePath": "C:\\Users\\lehuu\\source\\repos\\HelloWorld\\helloworld\\helloworld.csproj",
+      "filePath": "C:\\Users\\lehuu\\source\\repos\\SalePro\\helloworld\\helloworld.csproj",
       "libraryId": "SkiaSharp.Views.WindowsForms",
       "targetGraphs": [
         "net10.0-windows7.0"

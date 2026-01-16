@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using helloworld.Services;
+
 namespace helloworld
 {
     public partial class HoaDonForm : Form
@@ -165,6 +167,30 @@ namespace helloworld
                     // Set mặc định status
                     comboBox1.SelectedIndex = 2; // "Đã thanh toán"
                 }
+
+                // Add Print Button dynamically
+                if (buttonLuu != null)
+                {
+                    Button btnPrint = new Button();
+                    btnPrint.Text = "In Hóa Đơn";
+                    // Increase width to fit text
+                    btnPrint.Size = new Size(buttonLuu.Width + 40, buttonLuu.Height); 
+                    // Adjust location based on new width
+                    btnPrint.Location = new Point(buttonLuu.Location.X - btnPrint.Width - 10, buttonLuu.Location.Y);
+                    btnPrint.Anchor = buttonLuu.Anchor; 
+                    btnPrint.BackColor = Color.FromArgb(23, 162, 184); // Info color
+                    btnPrint.ForeColor = Color.White;
+                    btnPrint.FlatStyle = FlatStyle.Flat;
+                    btnPrint.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+                    btnPrint.Click += ButtonPrint_Click;
+                    
+                    if (buttonLuu.Parent != null)
+                    {
+                        buttonLuu.Parent.Controls.Add(btnPrint);
+                        btnPrint.BringToFront();
+                    }
+                }
+
             }
             catch (Exception ex)
             {
@@ -632,6 +658,41 @@ namespace helloworld
             catch (Exception ex)
             {
                 MessageBox.Show($"Lỗi khi lưu hóa đơn: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void ButtonPrint_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(labelMaHoaDon.Text))
+                {
+                    MessageBox.Show("Chưa có thông tin hóa đơn.", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                PrintService printService = new PrintService();
+                
+                // Construct Order object for printing
+                 Order order = new Order
+                {
+                    OrderCode = labelMaHoaDon.Text,
+                    CustomerId = customerId,
+                    Tax = Convert.ToDecimal(textBoxTax.Text.Replace(",", "")),
+                    TotalAmount = Convert.ToDecimal(textBoxTongTien.Text.Replace(",", "")),
+                    DiscountAmount = Convert.ToDecimal(textBoxGiamGia.Text.Replace(",", "")),
+                    Status = comboBox1.SelectedItem?.ToString() == "Đã thanh toán" ? "Completed" : "Pending",
+                    CreatedAt = DateTime.Now // Or parse date
+                };
+
+                string customerName = textBoxKhachHang.Text;
+                string employeeName = textBoxNhanVien.Text;
+
+                printService.PrintInvoice(order, orderDetailsTable, customerName, employeeName);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi in hóa đơn: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

@@ -1,6 +1,7 @@
 using System;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
+using helloworld.DAL;
 
 namespace helloworld
 {
@@ -10,11 +11,11 @@ namespace helloworld
     /// </summary>
     internal class AuthDAL
     {
-        private ConnectDatabase database;
+        private DatabaseContext database;
 
         public AuthDAL()
         {
-            database = new ConnectDatabase();
+            database = new DatabaseContext();
         }
 
         /// <summary>
