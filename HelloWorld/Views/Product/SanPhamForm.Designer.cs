@@ -43,6 +43,7 @@
             textBoxTenSanPham = new TextBox();
             tableLayoutPanel5 = new TableLayoutPanel();
             pictureBoxAnhSanPham = new PictureBox();
+            label4 = new Label();
             tableLayoutPanel6 = new TableLayoutPanel();
             materialCard3 = new ReaLTaiizor.Controls.MaterialCard();
             tableLayoutPanel7 = new TableLayoutPanel();
@@ -239,6 +240,7 @@
             tableLayoutPanel5.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
             tableLayoutPanel5.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
             tableLayoutPanel5.Controls.Add(pictureBoxAnhSanPham, 1, 0);
+            tableLayoutPanel5.Controls.Add(label4, 0, 0);
             tableLayoutPanel5.Dock = DockStyle.Fill;
             tableLayoutPanel5.Location = new Point(652, 3);
             tableLayoutPanel5.Name = "tableLayoutPanel5";
@@ -256,6 +258,16 @@
             pictureBoxAnhSanPham.Size = new Size(209, 132);
             pictureBoxAnhSanPham.TabIndex = 0;
             pictureBoxAnhSanPham.TabStop = false;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Dock = DockStyle.Right;
+            label4.Location = new Point(143, 0);
+            label4.Name = "label4";
+            label4.Size = new Size(68, 138);
+            label4.TabIndex = 1;
+            label4.Text = "Hình ảnh";
             // 
             // tableLayoutPanel6
             // 
@@ -517,6 +529,7 @@
             tableLayoutPanel4.ResumeLayout(false);
             tableLayoutPanel4.PerformLayout();
             tableLayoutPanel5.ResumeLayout(false);
+            tableLayoutPanel5.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBoxAnhSanPham).EndInit();
             tableLayoutPanel6.ResumeLayout(false);
             materialCard3.ResumeLayout(false);
@@ -566,5 +579,6 @@
         private ComboBox comboBoxDanhMuc;
         private TableLayoutPanel tableLayoutPanel5;
         private PictureBox pictureBoxAnhSanPham;
+        private Label label4;
     }
 }

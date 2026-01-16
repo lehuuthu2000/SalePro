@@ -19,6 +19,9 @@
     <Compile Update="Views\Common\ViewsTrangChu.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Views\Common\WooCommerceSettingsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Views\Customer\KhachHangForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -44,6 +47,9 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Views\Product\SanPhamViews.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\Product\SyncProductForm.cs">
       <SubType>Form</SubType>
     </Compile>
   </ItemGroup>

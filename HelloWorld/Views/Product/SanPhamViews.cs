@@ -30,6 +30,7 @@ namespace helloworld
             buttonXoa.Click += ButtonXoa_Click;
             textBoxTimKiem.TextChanged += TextBoxTimKiem_TextChanged;
             dataGridViewSanPham.CellDoubleClick += DataGridViewSanPham_CellDoubleClick;
+            buttonWordpress.Click += ButtonWordpress_Click;
         }
 
         /// <summary>
@@ -38,6 +39,14 @@ namespace helloworld
         private async void SanPhamViews_Load(object sender, EventArgs e)
         {
             await LoadProductsAsync();
+        }
+
+        private void ButtonWordpress_Click(object sender, EventArgs e)
+        {
+            var form = new helloworld.Views.Product.SyncProductForm();
+            form.ShowDialog();
+            // Reload after sync?
+            _ = LoadProductsAsync();
         }
 
         /// <summary>

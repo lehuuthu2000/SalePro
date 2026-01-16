@@ -3,24 +3,36 @@
   "WorkspaceRootPath": "C:\\Users\\lehuu\\source\\repos\\SalePro\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{3A798C92-DA22-B784-11D5-249F2DEA19E6}|helloworld\\helloworld.csproj|c:\\users\\lehuu\\source\\repos\\salepro\\helloworld\\views\\common\\main.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{3A798C92-DA22-B784-11D5-249F2DEA19E6}|helloworld\\helloworld.csproj|solutionrelative:helloworld\\views\\common\\main.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{3A798C92-DA22-B784-11D5-249F2DEA19E6}|helloworld\\helloworld.csproj|c:\\users\\lehuu\\source\\repos\\salepro\\helloworld\\views\\product\\sanphamviews.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{3A798C92-DA22-B784-11D5-249F2DEA19E6}|helloworld\\helloworld.csproj|solutionrelative:helloworld\\views\\product\\sanphamviews.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{3A798C92-DA22-B784-11D5-249F2DEA19E6}|helloworld\\helloworld.csproj|c:\\users\\lehuu\\source\\repos\\salepro\\helloworld\\views\\order\\hoadonform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{3A798C92-DA22-B784-11D5-249F2DEA19E6}|helloworld\\helloworld.csproj|solutionrelative:helloworld\\views\\order\\hoadonform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{3A798C92-DA22-B784-11D5-249F2DEA19E6}|helloworld\\helloworld.csproj|C:\\Users\\lehuu\\source\\repos\\SalePro\\helloworld\\views\\product\\sanphamchitietform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{3A798C92-DA22-B784-11D5-249F2DEA19E6}|helloworld\\helloworld.csproj|solutionrelative:helloworld\\views\\product\\sanphamchitietform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{3A798C92-DA22-B784-11D5-249F2DEA19E6}|helloworld\\helloworld.csproj|c:\\users\\lehuu\\source\\repos\\salepro\\helloworld\\views\\order\\hoadonviews.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{3A798C92-DA22-B784-11D5-249F2DEA19E6}|helloworld\\helloworld.csproj|C:\\Users\\lehuu\\source\\repos\\SalePro\\helloworld\\views\\product\\sanphamform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{3A798C92-DA22-B784-11D5-249F2DEA19E6}|helloworld\\helloworld.csproj|solutionrelative:helloworld\\views\\product\\sanphamform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3A798C92-DA22-B784-11D5-249F2DEA19E6}|helloworld\\helloworld.csproj|C:\\Users\\lehuu\\source\\repos\\SalePro\\helloworld\\views\\order\\hoadonviews.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{3A798C92-DA22-B784-11D5-249F2DEA19E6}|helloworld\\helloworld.csproj|solutionrelative:helloworld\\views\\order\\hoadonviews.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3A798C92-DA22-B784-11D5-249F2DEA19E6}|helloworld\\helloworld.csproj|c:\\users\\lehuu\\source\\repos\\salepro\\helloworld\\services\\securityservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3A798C92-DA22-B784-11D5-249F2DEA19E6}|helloworld\\helloworld.csproj|solutionrelative:helloworld\\services\\securityservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3A798C92-DA22-B784-11D5-249F2DEA19E6}|helloworld\\helloworld.csproj|C:\\Users\\lehuu\\source\\repos\\SalePro\\helloworld\\views\\order\\hoadonform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{3A798C92-DA22-B784-11D5-249F2DEA19E6}|helloworld\\helloworld.csproj|solutionrelative:helloworld\\views\\order\\hoadonform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
       "AbsoluteMoniker": "D:0:0:{3A798C92-DA22-B784-11D5-249F2DEA19E6}|helloworld\\helloworld.csproj|c:\\users\\lehuu\\source\\repos\\salepro\\helloworld\\bll\\orderbll.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{3A798C92-DA22-B784-11D5-249F2DEA19E6}|helloworld\\helloworld.csproj|solutionrelative:helloworld\\bll\\orderbll.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{3A798C92-DA22-B784-11D5-249F2DEA19E6}|helloworld\\helloworld.csproj|c:\\users\\lehuu\\source\\repos\\salepro\\helloworld\\services\\securityservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3A798C92-DA22-B784-11D5-249F2DEA19E6}|helloworld\\helloworld.csproj|solutionrelative:helloworld\\services\\securityservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{3A798C92-DA22-B784-11D5-249F2DEA19E6}|helloworld\\helloworld.csproj|C:\\Users\\lehuu\\source\\repos\\SalePro\\helloworld\\views\\common\\main.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{3A798C92-DA22-B784-11D5-249F2DEA19E6}|helloworld\\helloworld.csproj|solutionrelative:helloworld\\views\\common\\main.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     }
   ],
   "DocumentGroupContainers": [
@@ -30,35 +42,67 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "SanPhamChiTietForm.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\lehuu\\source\\repos\\SalePro\\HelloWorld\\Views\\Product\\SanPhamChiTietForm.cs",
+              "RelativeDocumentMoniker": "HelloWorld\\Views\\Product\\SanPhamChiTietForm.cs",
+              "ToolTip": "C:\\Users\\lehuu\\source\\repos\\SalePro\\HelloWorld\\Views\\Product\\SanPhamChiTietForm.cs [Design]",
+              "RelativeToolTip": "HelloWorld\\Views\\Product\\SanPhamChiTietForm.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-16T01:32:58.628Z"
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "SanPhamViews.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\lehuu\\source\\repos\\SalePro\\HelloWorld\\Views\\Product\\SanPhamViews.cs",
+              "RelativeDocumentMoniker": "HelloWorld\\Views\\Product\\SanPhamViews.cs",
+              "ToolTip": "C:\\Users\\lehuu\\source\\repos\\SalePro\\HelloWorld\\Views\\Product\\SanPhamViews.cs [Design]",
+              "RelativeToolTip": "HelloWorld\\Views\\Product\\SanPhamViews.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-16T01:32:51.403Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "SanPhamForm.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\lehuu\\source\\repos\\SalePro\\HelloWorld\\Views\\Product\\SanPhamForm.cs",
+              "RelativeDocumentMoniker": "HelloWorld\\Views\\Product\\SanPhamForm.cs",
+              "ToolTip": "C:\\Users\\lehuu\\source\\repos\\SalePro\\HelloWorld\\Views\\Product\\SanPhamForm.cs [Design]",
+              "RelativeToolTip": "HelloWorld\\Views\\Product\\SanPhamForm.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-16T01:33:02.121Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
               "Title": "Main.cs [Design]",
               "DocumentMoniker": "C:\\Users\\lehuu\\source\\repos\\SalePro\\HelloWorld\\Views\\Common\\Main.cs",
               "RelativeDocumentMoniker": "HelloWorld\\Views\\Common\\Main.cs",
               "ToolTip": "C:\\Users\\lehuu\\source\\repos\\SalePro\\HelloWorld\\Views\\Common\\Main.cs [Design]",
               "RelativeToolTip": "HelloWorld\\Views\\Common\\Main.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-15T17:58:54.44Z",
-              "EditorCaption": " [Design]"
+              "WhenOpened": "2026-01-15T17:58:54.44Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 5,
               "Title": "HoaDonForm.cs [Design]",
               "DocumentMoniker": "C:\\Users\\lehuu\\source\\repos\\SalePro\\HelloWorld\\Views\\Order\\HoaDonForm.cs",
               "RelativeDocumentMoniker": "HelloWorld\\Views\\Order\\HoaDonForm.cs",
               "ToolTip": "C:\\Users\\lehuu\\source\\repos\\SalePro\\HelloWorld\\Views\\Order\\HoaDonForm.cs [Design]",
               "RelativeToolTip": "HelloWorld\\Views\\Order\\HoaDonForm.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-15T16:40:52.963Z",
-              "EditorCaption": " [Design]"
+              "WhenOpened": "2026-01-15T16:40:52.963Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 6,
               "Title": "OrderBLL.cs",
               "DocumentMoniker": "C:\\Users\\lehuu\\source\\repos\\SalePro\\HelloWorld\\BLL\\OrderBLL.cs",
               "RelativeDocumentMoniker": "HelloWorld\\BLL\\OrderBLL.cs",
@@ -66,20 +110,18 @@
               "RelativeToolTip": "HelloWorld\\BLL\\OrderBLL.cs",
               "ViewState": "AgIAAJ0BAAAAAAAAAAAjwIkBAAAiAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-15T15:48:12.024Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-15T15:48:12.024Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "HoaDonViews.cs [Design]",
               "DocumentMoniker": "C:\\Users\\lehuu\\source\\repos\\SalePro\\HelloWorld\\Views\\Order\\HoaDonViews.cs",
               "RelativeDocumentMoniker": "HelloWorld\\Views\\Order\\HoaDonViews.cs",
               "ToolTip": "C:\\Users\\lehuu\\source\\repos\\SalePro\\HelloWorld\\Views\\Order\\HoaDonViews.cs [Design]",
               "RelativeToolTip": "HelloWorld\\Views\\Order\\HoaDonViews.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-15T16:42:36.52Z",
-              "EditorCaption": " [Design]"
+              "WhenOpened": "2026-01-15T16:42:36.52Z"
             },
             {
               "$type": "Document",
@@ -91,8 +133,7 @@
               "RelativeToolTip": "HelloWorld\\Services\\SecurityService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAGAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-15T15:46:12.27Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-15T15:46:12.27Z"
             }
           ]
         }

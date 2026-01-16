@@ -11,24 +11,86 @@ namespace helloworld
     public partial class ViewsCaiDat : Form
     {
         private SmtpConfig smtpConfig;
+        private helloworld.BLL.WooCommerceConfig wcConfig;
+
+        // Controls for WooCommerce
+        private TextBox txtWcDomain;
+        private TextBox txtWcKey;
+        private TextBox txtWcSecret;
+        private Button btnTestWc;
 
         public ViewsCaiDat()
         {
             InitializeComponent();
             smtpConfig = new SmtpConfig();
+            wcConfig = new helloworld.BLL.WooCommerceConfig();
+            
+            InitializeWooCommerceControls();
+            
             LoadSmtpConfig();
+            LoadWcConfig();
         }
 
-        /// <summary>
-        /// Load cấu hình SMTP từ file và hiển thị lên form
-        /// </summary>
+        private void InitializeWooCommerceControls()
+        {
+            // Create a new GroupBox for WooCommerce
+            GroupBox grpWc = new GroupBox();
+            grpWc.Text = "WooCommerce";
+            grpWc.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            grpWc.Location = new Point(410, 43); // Placement to the right of SMTP or Adjust as needed
+            grpWc.Size = new Size(380, 250);
+            
+            // Adjust layout if needed. The existing form uses TableLayoutPanel.
+            // Let's try to add it to the TableLayoutPanel1 if possible, or just add to Controls on top.
+            // tableLayoutPanel1 has 2 columns. Column 0 has SMTP. Column 1 is empty?
+            // Checking Designer: tableLayoutPanel1.Controls.Add(tableLayoutPanel2, 0, 0); 
+            // It seems Column 1 is empty. Perfect place for WooCommerce.
+            
+            Panel panelWc = new Panel();
+            panelWc.Dock = DockStyle.Fill;
+            
+            Label lblTitle = new Label { Text = "WooCommerce", Font = new Font("Segoe UI", 13.8F, FontStyle.Bold), AutoSize = true, Location = new Point(3, 0) };
+            panelWc.Controls.Add(lblTitle);
+            
+            TableLayoutPanel tblWc = new TableLayoutPanel();
+            tblWc.Location = new Point(3, 43);
+            tblWc.Size = new Size(380, 180);
+            tblWc.ColumnCount = 2;
+            tblWc.RowCount = 4;
+            tblWc.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 120F));
+            tblWc.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            
+            // Domain
+            tblWc.Controls.Add(new Label { Text = "Domain:", Dock = DockStyle.Fill, TextAlign = ContentAlignment.MiddleLeft }, 0, 0);
+            txtWcDomain = new TextBox { Dock = DockStyle.Fill };
+            tblWc.Controls.Add(txtWcDomain, 1, 0);
+            
+            // Key
+            tblWc.Controls.Add(new Label { Text = "Consumer Key:", Dock = DockStyle.Fill, TextAlign = ContentAlignment.MiddleLeft }, 0, 1);
+            txtWcKey = new TextBox { Dock = DockStyle.Fill };
+            tblWc.Controls.Add(txtWcKey, 1, 1);
+            
+            // Secret
+            tblWc.Controls.Add(new Label { Text = "Consumer Secret:", Dock = DockStyle.Fill, TextAlign = ContentAlignment.MiddleLeft }, 0, 2);
+            txtWcSecret = new TextBox { Dock = DockStyle.Fill, PasswordChar = '*' };
+            tblWc.Controls.Add(txtWcSecret, 1, 2);
+            
+            // Test Button
+            btnTestWc = new Button { Text = "Kiểm tra kết nối", AutoSize = true };
+            btnTestWc.Click += BtnTestWc_Click;
+            tblWc.Controls.Add(btnTestWc, 1, 3);
+            
+            panelWc.Controls.Add(tblWc);
+            
+            // Add to Main TableLayout (Column 1)
+            this.tableLayoutPanel1.Controls.Add(panelWc, 1, 0);
+        }
+
         private void LoadSmtpConfig()
         {
             try
             {
                 smtpConfig.Load();
-
-                // Hiển thị cấu hình lên các textbox
                 textBoxSMTPHOST.Text = smtpConfig.SmtpHost;
                 textBoxSMTPPOST.Text = smtpConfig.SmtpPort.ToString();
                 textBoxSMTPEMAIL.Text = smtpConfig.SmtpUsername;
@@ -36,81 +98,65 @@ namespace helloworld
             }
             catch (Exception ex)
             {
-                MessageBox.Show(
-                    $"Lỗi khi tải cấu hình SMTP: {ex.Message}",
-                    "Cảnh báo",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Warning
-                );
+                MessageBox.Show($"Lỗi tải SMTP: {ex.Message}");
             }
         }
 
-        /// <summary>
-        /// Xử lý sự kiện khi click nút Lưu cài đặt
-        /// </summary>
+        private void LoadWcConfig()
+        {
+            try
+            {
+                wcConfig.Load();
+                txtWcDomain.Text = wcConfig.Domain;
+                txtWcKey.Text = wcConfig.ConsumerKey;
+                txtWcSecret.Text = wcConfig.ConsumerSecret;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi tải WooCommerce: {ex.Message}");
+            }
+        }
+        
+        private async void BtnTestWc_Click(object sender, EventArgs e)
+        {
+            var service = new helloworld.Services.WooCommerceService();
+            try
+            {
+                bool ok = await service.CheckConnectionAsync(txtWcDomain.Text, txtWcKey.Text, txtWcSecret.Text);
+                if (ok) MessageBox.Show("Kết nối WooCommerce thành công!", "OK", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                else MessageBox.Show("Kết nối thất bại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi: {ex.Message}");
+            }
+        }
+
         private void buttonLuuCaiDat_Click(object sender, EventArgs e)
         {
             try
             {
-                // Validate dữ liệu
-                if (string.IsNullOrWhiteSpace(textBoxSMTPHOST.Text))
-                {
-                    MessageBox.Show("Vui lòng nhập SMTP Host.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    textBoxSMTPHOST.Focus();
-                    return;
-                }
-
-                if (string.IsNullOrWhiteSpace(textBoxSMTPPOST.Text))
-                {
-                    MessageBox.Show("Vui lòng nhập SMTP Port.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    textBoxSMTPPOST.Focus();
-                    return;
-                }
-
-                if (!int.TryParse(textBoxSMTPPOST.Text, out int port) || port <= 0 || port > 65535)
-                {
-                    MessageBox.Show("SMTP Port phải là số từ 1 đến 65535.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    textBoxSMTPPOST.Focus();
-                    return;
-                }
-
-                if (string.IsNullOrWhiteSpace(textBoxSMTPEMAIL.Text))
-                {
-                    MessageBox.Show("Vui lòng nhập SMTP Email.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    textBoxSMTPEMAIL.Focus();
-                    return;
-                }
-
-                if (string.IsNullOrWhiteSpace(textBoxSMTPPASSWORD.Text))
-                {
-                    MessageBox.Show("Vui lòng nhập SMTP Password.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    textBoxSMTPPASSWORD.Focus();
-                    return;
-                }
-
-                // Lưu cấu hình
+                // Save SMTP
+                int port = 0;
+                int.TryParse(textBoxSMTPPOST.Text, out port);
+                
                 smtpConfig.SmtpHost = textBoxSMTPHOST.Text.Trim();
                 smtpConfig.SmtpPort = port;
                 smtpConfig.SmtpUsername = textBoxSMTPEMAIL.Text.Trim();
                 smtpConfig.SmtpPassword = textBoxSMTPPASSWORD.Text;
                 smtpConfig.Save();
+                
+                // Save WC
+                wcConfig.Domain = txtWcDomain.Text.Trim();
+                wcConfig.ConsumerKey = txtWcKey.Text.Trim();
+                wcConfig.ConsumerSecret = txtWcSecret.Text.Trim();
+                wcConfig.Save();
 
-                MessageBox.Show(
-                    "Cấu hình SMTP đã được lưu thành công!\n\n" +
-                    "Lưu ý: Mật khẩu đã được mã hóa an toàn bằng Windows DPAPI.",
-                    "Thành công",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Information
-                );
+                MessageBox.Show("Đã lưu tất cả cài đặt thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
             {
-                MessageBox.Show(
-                    $"Lỗi khi lưu cấu hình SMTP: {ex.Message}",
-                    "Lỗi",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error
-                );
+                MessageBox.Show($"Lỗi khi lưu: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

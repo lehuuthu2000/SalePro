@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             tableLayoutPanel4 = new TableLayoutPanel();
+            buttonWordpress = new Button();
             label1 = new Label();
             buttonThemmoi = new Button();
             buttonXoa = new Button();
@@ -57,12 +58,14 @@
             // 
             // tableLayoutPanel4
             // 
-            tableLayoutPanel4.ColumnCount = 5;
+            tableLayoutPanel4.ColumnCount = 6;
             tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 320F));
             tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 100F));
             tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 70F));
             tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 100F));
+            tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 250F));
             tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            tableLayoutPanel4.Controls.Add(buttonWordpress, 4, 0);
             tableLayoutPanel4.Controls.Add(label1, 0, 0);
             tableLayoutPanel4.Controls.Add(buttonThemmoi, 1, 0);
             tableLayoutPanel4.Controls.Add(buttonXoa, 2, 0);
@@ -74,6 +77,17 @@
             tableLayoutPanel4.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
             tableLayoutPanel4.Size = new Size(779, 39);
             tableLayoutPanel4.TabIndex = 2;
+            // 
+            // buttonWordpress
+            // 
+            buttonWordpress.BackColor = Color.PaleGreen;
+            buttonWordpress.Dock = DockStyle.Fill;
+            buttonWordpress.Location = new Point(593, 3);
+            buttonWordpress.Name = "buttonWordpress";
+            buttonWordpress.Size = new Size(244, 33);
+            buttonWordpress.TabIndex = 4;
+            buttonWordpress.Text = "Đồng bộ Wordpress";
+            buttonWordpress.UseVisualStyleBackColor = false;
             // 
             // label1
             // 
@@ -316,5 +330,6 @@
         private TextBox textBoxTimKiem;
         private DataGridView dataGridViewSanPham;
         private Button buttonDanhMuc;
+        private Button buttonWordpress;
     }
 }

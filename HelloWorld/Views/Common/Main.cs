@@ -23,6 +23,7 @@ namespace helloworld
         private void Main_Load(object sender, EventArgs e)
         {
             // Tự động hiển thị Trang chủ khi form được mở
+            SetActiveButton(button1);
             OpenChildForm(new ViewsTrangChu());
 
             // Phân quyền menu
@@ -176,7 +177,7 @@ namespace helloworld
 
         private void ResetButtonStyle(Button btn)
         {
-            btn.BackColor = Color.White; // Or default color
+            btn.BackColor = SystemColors.Control; // Match panel background
             btn.ForeColor = Color.Black; 
         }
 
